@@ -1,5 +1,5 @@
-import { isValidCoordinates, getCoordinates } from "../coordinates";
-import { createBoard } from "../gameboard";
+import { isValidCoordinates, getCoordinates } from "../src/coordinates";
+import { createBoard } from "../src/gameboard";
 
 describe("getCoordinates", () => {
   test("Start and End on the same row, return list", () => {

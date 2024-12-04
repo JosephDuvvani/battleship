@@ -1,4 +1,4 @@
-import Gameboard, { createBoard } from "../gameboard";
+import Gameboard, { createBoard } from "../src/gameboard";
 
 describe("getBoard", () => {
   test("create board with length 10", () => {
