@@ -1,8 +1,7 @@
 import Ship from "./ship";
-import mergeSort from "./mergeSort";
 
 export default Gameboard = () => {
-  let _board = getBoard(10);
+  let _board = createBoard(10);
   let _myShips = [];
 
   const placeShip = (position) => {
@@ -33,38 +32,11 @@ export default Gameboard = () => {
   };
 };
 
-export const getBoard = (length) => {
+export const createBoard = (length) => {
   let array = [];
   while (array.length < length) array.push([]);
   for (let inner of array) {
     while (inner.length < length) inner.push("$");
   }
   return array;
-};
-
-export const isValidPosition = (place, board) => {
-  const horizontal = place.filter((xy) => xy[0] === place[0][0]);
-  const vertical = place.filter((xy) => xy[1] === place[0][1]);
-  if (horizontal.length === place.length) {
-    const y = mergeSort(place.map((xy) => xy[1]));
-    if (y[0] < 0 || y[y.length - 1] >= board.length) return false;
-    let yValue = y[0];
-    for (let i = 0; i < y.length; i++) {
-      if (y[i] !== yValue) return false;
-      if (typeof board[horizontal[0][0]][y[i]] === "number") return false;
-      yValue++;
-    }
-    return true;
-  } else if (vertical.length === place.length) {
-    const x = mergeSort(place.map((xy) => xy[0]));
-    if (x[0] < 0 || x[x.length - 1] >= board.length) return false;
-    let xValue = x[0];
-    for (let i = 0; i < x.length; i++) {
-      if (x[i] !== xValue) return false;
-      if (typeof board[vertical[0][0]][x[i]] === "number") return false;
-      xValue++;
-    }
-    return true;
-  }
-  return false;
 };
