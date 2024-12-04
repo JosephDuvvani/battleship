@@ -25,10 +25,13 @@ export default Gameboard = () => {
     return true;
   };
 
+  const getBoard = () => _board;
+
   return {
     placeShip,
     receiveAttack,
     isAllSunk,
+    getBoard,
   };
 };
 
