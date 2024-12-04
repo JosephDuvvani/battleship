@@ -1,6 +1,6 @@
-import Gameboard from "./gameboard";
+import { Gameboard } from "./gameboard";
 
-export default Player = () => {
+export default () => {
   let gameBoard = Gameboard();
   const ships = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4];
   let placedShips = [];

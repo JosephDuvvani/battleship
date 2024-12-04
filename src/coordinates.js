@@ -1,4 +1,4 @@
-import mergeSort from "./mergeSort";
+import { mergeSort } from "./mergeSort";
 
 export const getCoordinates = (start, end = start) => {
   if (start[0] !== end[0] && start[1] !== end[1]) return null;

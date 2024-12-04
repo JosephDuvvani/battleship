@@ -1,6 +1,6 @@
 import Ship from "./ship";
 
-export default Gameboard = () => {
+export const Gameboard = () => {
   let _board = createBoard(10);
   let _myShips = [];
 

@@ -1,4 +1,4 @@
-export default mergeSort = (myArray) => {
+export const mergeSort = (myArray) => {
   const n = myArray.length;
   if (n <= 1) {
     return myArray;
