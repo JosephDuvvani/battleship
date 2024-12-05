@@ -65,7 +65,7 @@ export const checkCollision = (xy, board) => {
 
   for (let xCo of xArray) {
     for (let yCo of yArray) {
-      if (board[xCo][yCo] > 0) return true;
+      if (board[xCo][yCo] >= 0) return true;
     }
   }
   return false;
