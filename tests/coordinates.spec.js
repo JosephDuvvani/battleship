@@ -1,4 +1,8 @@
-import { isValidCoordinates, getCoordinates } from "../src/coordinates";
+import {
+  isValidCoordinates,
+  getCoordinates,
+  checkCollision,
+} from "../src/coordinates";
 import { createBoard } from "../src/gameboard";
 
 describe("getCoordinates", () => {
@@ -47,5 +51,22 @@ describe("isValidCoordinates", () => {
         board
       )
     ).toBe(true);
+  });
+});
+
+describe("collision", () => {
+  let board = createBoard(4);
+  board[1][1] = 1;
+  test("return true if adjacent cell is not empty", () => {
+    expect(checkCollision([1, 2], board, 2)).toBe(true);
+  });
+  test("return false if adjacent cells are empty", () => {
+    expect(checkCollision([1, 3], board, 2)).toBe(false);
+  });
+  test("return false if adjacent cells are empty", () => {
+    expect(checkCollision([3, 3], board, 2)).toBe(false);
+  });
+  test("return false if adjacent cell has the same value", () => {
+    expect(checkCollision([1, 2], board, 1)).toBe(false);
   });
 });
