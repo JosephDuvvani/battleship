@@ -57,14 +57,14 @@ export const isValidCoordinates = (coordinates, board) => {
   return false;
 };
 
-export const checkCollision = (xy, board, shipIndex) => {
+export const checkCollision = (xy, board) => {
   const [x, y] = xy;
   let xArray = [x, x - 1, x + 1].filter((x) => x >= 0 && x < board.length);
   let yArray = [y, y - 1, y + 1].filter((y) => y >= 0 && y < board.length);
 
   for (let xCo of xArray) {
     for (let yCo of yArray) {
-      if (board[xCo][yCo] > 0 && board[xCo][yCo] !== shipIndex) return true;
+      if (board[xCo][yCo] > 0) return true;
     }
   }
   return false;

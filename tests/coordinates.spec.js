@@ -66,7 +66,4 @@ describe("collision", () => {
   test("return false if adjacent cells are empty", () => {
     expect(checkCollision([3, 3], board, 2)).toBe(false);
   });
-  test("return false if adjacent cell has the same value", () => {
-    expect(checkCollision([1, 2], board, 1)).toBe(false);
-  });
 });
