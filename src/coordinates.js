@@ -59,6 +59,7 @@ export const isValidCoordinates = (coordinates, board) => {
 
 export const checkCollision = (xy, board) => {
   const [x, y] = xy;
+  if (x < 0 || x >= board.length || y < 0 || y >= board.length) return true;
   let xArray = [x, x - 1, x + 1].filter((x) => x >= 0 && x < board.length);
   let yArray = [y, y - 1, y + 1].filter((y) => y >= 0 && y < board.length);
 
