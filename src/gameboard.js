@@ -3,6 +3,7 @@ import Ship from "./ship";
 export const Gameboard = () => {
   let _board = createBoard(10);
   let _myShips = [];
+  let damage = [];
 
   const placeShip = (position) => {
     for (let coordinates of position) {
@@ -13,9 +14,11 @@ export const Gameboard = () => {
 
   const receiveAttack = (xy) => {
     const shipIndex = _board[xy[0]][xy[1]];
-    shipIndex === "$" || shipIndex === -1
-      ? (_board[xy[0]][xy[1]] = -1)
-      : _myShips[shipIndex].hit();
+    if (shipIndex === "$" || shipIndex === -1) _board[xy[0]][xy[1]] = -1;
+    else {
+      _myShips[shipIndex].hit();
+      damage.push(xy);
+    }
   };
 
   const isAllSunk = () => {
@@ -27,11 +30,20 @@ export const Gameboard = () => {
 
   const getBoard = () => _board;
 
+  const isDamagedAt = (coordinates) => {
+    if (damage.length === 0) return false;
+    for (let pos of damage) {
+      if (pos[0] == coordinates[0] && pos[1] == coordinates[1]) return true;
+    }
+    return false;
+  };
+
   return {
     placeShip,
     receiveAttack,
     isAllSunk,
     getBoard,
+    isDamagedAt,
   };
 };
 

@@ -39,11 +39,14 @@ export default () => {
   const attack = (coordinates) => gameBoard.receiveAttack(coordinates);
   const isDefeated = () => gameBoard.isAllSunk();
 
+  const isDamagedAt = (coordinates) => gameBoard.isDamagedAt(coordinates);
+
   return {
     getBoard,
     getShips,
     attack,
     isDefeated,
     randomise,
+    isDamagedAt,
   };
 };
