@@ -1,6 +1,6 @@
 import { Gameboard, checkCollision } from "./gameboard";
 
-export default () => {
+export const Player = () => {
   let gameBoard = Gameboard();
   const ships = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4];
 
@@ -48,4 +48,35 @@ export default () => {
     randomise,
     isDamagedAt,
   };
+};
+
+export const computerAttack = (player) => {
+  const board = player.getBoard();
+  let invalid = [];
+  let [y, x] = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
+  while (invalid.length < board.length * board.length) {
+    if (board[y][x] == "$") return [y, x];
+    else if (board[y][x] >= 0 && !player.isDamagedAt([y, x])) return [y, x];
+    else if (board[x][y] == "$") return [x, y];
+    else if (board[x][y] >= 0 && !player.isDamagedAt([x, y])) return [x, y];
+    else if (board[x][x] == "$") return [x, x];
+    else if (board[x][x] >= 0 && !player.isDamagedAt([x, x])) return [x, x];
+    else if (board[y][y] == "$") return [y, y];
+    else if (board[y][y] >= 0 && !player.isDamagedAt([y, y])) return [y, y];
+
+    invalid = [...invalid, [y, x], [x, y], [x, x], [y, y]];
+    let isInvalid = true;
+    while (isInvalid == true && invalid.length < board.length * board.length) {
+      y = Math.floor(Math.random() * 10);
+      x = Math.floor(Math.random() * 10);
+      let check = 0;
+      for (let xy of invalid) {
+        if (xy[0] == y && xy[1] == x) {
+          check++;
+        }
+      }
+      if (check > 0) check = 0;
+      else isInvalid = false;
+    }
+  }
 };
