@@ -1,5 +1,4 @@
-import { Gameboard } from "./gameboard";
-import { checkCollision } from "./coordinates";
+import { Gameboard, checkCollision } from "./gameboard";
 
 export default () => {
   let gameBoard = Gameboard();
