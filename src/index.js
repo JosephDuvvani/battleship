@@ -38,19 +38,21 @@ const play = () => {
     }
   } else {
     let coordinates = computerAttack(playerOne);
-    playerOne.attack(coordinates);
-    if (playerOne.isDamagedAt(coordinates) && !playerOne.isDefeated()) {
-      renderField(containers[0], playerOne);
-      play();
-    } else if (!playerOne.isDefeated()) {
-      renderField(containers[0], playerOne);
-      turn = 0;
-      play();
-    } else {
-      console.log("Game Over");
-      renderField(containers[0], playerOne);
-      renderField(containers[1], playerTwo);
-    }
+    setTimeout(function () {
+      playerOne.attack(coordinates);
+      if (playerOne.isDamagedAt(coordinates) && !playerOne.isDefeated()) {
+        renderField(containers[0], playerOne);
+        play();
+      } else if (!playerOne.isDefeated()) {
+        renderField(containers[0], playerOne);
+        turn = 0;
+        play();
+      } else {
+        console.log("Game Over");
+        renderField(containers[0], playerOne);
+        renderField(containers[1], playerTwo);
+      }
+    }, 1000);
   }
 };
 
