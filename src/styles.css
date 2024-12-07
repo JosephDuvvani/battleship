@@ -1,9 +1,85 @@
+:root {
+    --text: hsl(225, 25%, 6%);
+    --background: hsl(220, 27%, 98%);
+    --primary: hsl(225, 26%, 53%);
+    --secondary: hsl(34, 25%, 74%);
+    --accent: hsl(88, 26%, 63%);
+
+    --clr-missed: hsl(220, 27%, 85%);
+    --clr-hit: hsl(0, 100%, 58%);
+}
+
 * {
     box-sizing: border-box;
 }
 
+h1 {
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    color: var(--text);
+}
+
+.main-container {
+    display: grid;
+    grid-auto-rows: min-content;
+    min-height: 100svh;
+    min-width: 100%;
+    padding: 1rem;
+    background-color: var(--background);
+}
+
 .title {
-    color: green;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.play-call-container {
+    display: grid;
+    justify-items: center;
+    margin: 1rem 0 2rem 0;
+}
+
+.play-call {
+    background-color: var(--secondary);
+    padding: .5rem 1rem;
+    min-width: 20rem;
+    border-radius: 50vh;
+}
+
+.players-container {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 2rem;
+}
+
+.player {
+    display: grid;
+}
+
+.players-container .player-1 {
+    justify-self: end;
+}
+.players-container .player-2 {
+    justify-self: start;
+}
+
+.player-title {
+    display: grid;
+    justify-items: center;
+    order: 1;
+    margin: 1rem;
+}
+
+.battlefield-table {
+    background-color: var(--primary);
 }
 
 .battlefield-row {
@@ -20,17 +96,17 @@
 }
 
 .battlefield-cell_empty {
-    background-color: #f0bca8;
+    background-color: var(--background);
 }
 .battlefield-cell_ship {
-    background-color: #719ca7;;
+    background-color: var(--secondary);
 }
 .battlefield-cell_missed {
-    background-color: hsla(17, 71%, 80%, 0.5);
+    background-color: var(--clr-missed);
 }
 .battlefield-cell_hit {
-    background-color: hsl(0, 96%, 36%);
+    background-color: var(--clr-hit);
 }
 .battlefield-cell_cover {
-    background-color: #f0bca8;
+    background-color: var(--background);
 }
