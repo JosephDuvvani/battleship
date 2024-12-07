@@ -35,6 +35,8 @@ export const Player = () => {
     }
   };
 
+  const removeShip = (position) => gameBoard.removeShip(position);
+  const dropShip = (position, index) => gameBoard.moveShip(position, index);
   const attack = (coordinates) => gameBoard.receiveAttack(coordinates);
   const isDefeated = () => gameBoard.isAllSunk();
 
@@ -46,6 +48,8 @@ export const Player = () => {
     attack,
     isDefeated,
     randomise,
+    dropShip,
+    removeShip,
     isDamagedAt,
   };
 };
@@ -78,5 +82,36 @@ export const computerAttack = (player) => {
       if (check > 0) check = 0;
       else isInvalid = false;
     }
+  }
+};
+
+export const getShipPosition = (coordinates, board, ships) => {
+  const [y, x] = coordinates;
+  const length = ships[board[y][x]];
+  let position = [[y, x]];
+  if (length == 1) return position;
+  for (let i = 1; i <= length; i++) {
+    if (y + i >= board.length) break;
+    if (board[y + i][x] != board[y][x]) break;
+    position.push([y + i, x]);
+    if (position.length === length) return position;
+  }
+  for (let i = 1; i <= length; i++) {
+    if (y - i < 0) break;
+    if (board[y - i][x] != board[y][x]) break;
+    position.unshift([y - i, x]);
+    if (position.length === length) return position;
+  }
+  for (let i = 1; i <= length; i++) {
+    if (x + i >= board.length) break;
+    if (board[y][x + i] != board[y][x]) break;
+    position.push([y, x + i]);
+    if (position.length === length) return position;
+  }
+  for (let i = 1; i <= length; i++) {
+    if (x - i < 0) break;
+    if (board[y][x - i] != board[y][x]) break;
+    position.unshift([y, x - i]);
+    if (position.length === length) return position;
   }
 };

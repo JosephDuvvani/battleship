@@ -1,4 +1,4 @@
-export const renderField = (container, player) => {
+export const renderField = (container, player, drag = false) => {
   const board = player.getBoard();
   const table = document.createElement("table");
   table.classList.add("battlefield-table");
@@ -23,6 +23,10 @@ export const renderField = (container, player) => {
         data.classList.add("battlefield-cell_missed");
       else if (board[j][i] >= 0) data.classList.add("battlefield-cell_ship");
 
+      if (drag === true && board[j][i] >= 0)
+        data.classList.add("battlefield-cell_drag");
+      if (drag === true) data.classList.add("battlefield-cell_drop");
+
       data.dataset.y = j;
       data.dataset.x = i;
 
@@ -35,7 +39,7 @@ export const renderField = (container, player) => {
   container.appendChild(table);
 };
 
-export const renderEnemy = (container, player) => {
+export const renderEnemy = (container, player, drag = false) => {
   const board = player.getBoard();
   const table = document.createElement("table");
   table.classList.add("battlefield-table");
@@ -57,6 +61,9 @@ export const renderEnemy = (container, player) => {
       else if (player.isDamagedAt([j, i])) {
         data.classList.add("battlefield-cell_hit");
       } else data.classList.add("battlefield-cell_cover");
+
+      if (drag === true && board[j][i] >= 0)
+        data.classList.add("battlefield-cell_drag");
       data.dataset.y = j;
       data.dataset.x = i;
 

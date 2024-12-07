@@ -112,3 +112,17 @@ body {
 .battlefield-cell_cover {
     background-color: var(--background);
 }
+
+.play-button-container {
+    display: grid;
+    justify-items: center;
+}
+
+.play-button {
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: .3rem 1.5rem;
+    border-radius: 50vh;
+    background-color: var(--accent);
+    cursor: pointer;
+}

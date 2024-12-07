@@ -1,10 +1,12 @@
 import "./styles.css";
-import { Player, computerAttack } from "./player";
+import { Player, computerAttack, getShipPosition } from "./player";
 import { renderField, renderEnemy } from "./render";
+import { checkCollision } from "./gameboard";
 
 const containers = document.querySelectorAll(".grid-container");
 const playCall = document.querySelector(".play-call");
 const playCallMsg = document.getElementById("play-call-message");
+const playButton = document.querySelector(".play-button");
 
 let [playerOne, playerTwo] = [Player(), Player()];
 let turn = 0;
@@ -12,8 +14,70 @@ let turn = 0;
 playerOne.randomise();
 playerTwo.randomise();
 
-renderField(containers[0], playerOne);
-renderEnemy(containers[1], playerTwo);
+renderField(containers[0], playerOne, true);
+renderEnemy(containers[1], playerTwo, true);
+
+const drag = (player, grid) => {
+  const dragCells = document.querySelectorAll(".battlefield-cell_drag");
+  for (let cell of dragCells) {
+    cell.addEventListener("mousedown", (e) => {
+      let dragPosition;
+      const x = +e.target.dataset.x;
+      const y = +e.target.dataset.y;
+      dragPosition = getShipPosition(
+        [y, x],
+        player.getBoard(),
+        player.getShips()
+      );
+      const shipIndex = player.getBoard()[y][x];
+      player.removeShip(dragPosition);
+      renderField(grid, player, true);
+      drop(dragPosition, [y, x], player, shipIndex, grid);
+    });
+  }
+};
+drag(playerOne, containers[0]);
+
+const drop = (dragPosition, initial, player, index, grid) => {
+  const dropCells = document.querySelectorAll(".battlefield-cell_drop");
+  const table = document.querySelector(".battlefield-table");
+
+  table.addEventListener("mouseleave", () => {
+    player.dropShip(dragPosition, index);
+    renderField(grid, player, true);
+    drag(player, grid);
+  });
+
+  table.addEventListener("mouseup", () => {
+    player.dropShip(dragPosition, index);
+    renderField(grid, player, true);
+    drag(player, grid);
+  });
+
+  let dropPosition = [];
+  for (let cell of dropCells) {
+    cell.addEventListener("mouseup", (e) => {
+      const x = +e.target.dataset.x;
+      const y = e.target.dataset.y;
+      let yDiff = initial[0] - y;
+      let xDiff = initial[1] - x;
+      for (let pos of dragPosition) {
+        let yx = [pos[0] - yDiff, pos[1] - xDiff];
+        if (checkCollision(yx, player.getBoard())) {
+          player.dropShip(dragPosition, index);
+          renderField(grid, player, true);
+          drag(player, grid);
+          return;
+        }
+        dropPosition.push(yx);
+      }
+      player.dropShip(dropPosition, index);
+      renderField(grid, player, true);
+      drag(player, grid);
+      e.stopPropagation();
+    });
+  }
+};
 
 const play = () => {
   if (turn == 0) {
@@ -64,4 +128,4 @@ const play = () => {
   }
 };
 
-play();
+playButton.addEventListener("click", play);

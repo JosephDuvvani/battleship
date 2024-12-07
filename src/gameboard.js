@@ -12,6 +12,18 @@ export const Gameboard = () => {
     -_myShips.push(new Ship(position.length));
   };
 
+  const moveShip = (position, index) => {
+    for (let coordinates of position) {
+      _board[coordinates[0]][coordinates[1]] = index;
+    }
+  };
+
+  const removeShip = (position) => {
+    for (let coordinates of position) {
+      _board[coordinates[0]][coordinates[1]] = "$";
+    }
+  };
+
   const receiveAttack = (xy) => {
     const shipIndex = _board[xy[0]][xy[1]];
     if (shipIndex === "$" || shipIndex === -1) _board[xy[0]][xy[1]] = -1;
@@ -40,6 +52,8 @@ export const Gameboard = () => {
 
   return {
     placeShip,
+    moveShip,
+    removeShip,
     receiveAttack,
     isAllSunk,
     getBoard,
