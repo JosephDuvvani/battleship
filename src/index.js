@@ -3,6 +3,8 @@ import { Player, computerAttack } from "./player";
 import { renderField, renderEnemy } from "./render";
 
 const containers = document.querySelectorAll(".grid-container");
+const playCall = document.querySelector(".play-call");
+const playCallMsg = document.getElementById("play-call-message");
 
 let [playerOne, playerTwo] = [Player(), Player()];
 let turn = 0;
@@ -15,6 +17,8 @@ renderEnemy(containers[1], playerTwo);
 
 const play = () => {
   if (turn == 0) {
+    playCall.style.backgroundColor = "var(--clr-greenlight)";
+    playCallMsg.textContent = "Player One's turn";
     const cells = document.querySelectorAll(".battlefield-cell_cover");
     for (let target of cells) {
       target.addEventListener("click", (e) => {
@@ -30,13 +34,16 @@ const play = () => {
           turn = 1;
           play();
         } else {
-          console.log("Game Over");
+          playCall.style.background = "var(--clr-winner)";
+          playCallMsg.textContent = "Winner: PLAYER ONE!!!";
           renderField(containers[0], playerOne);
           renderField(containers[1], playerTwo);
         }
       });
     }
   } else {
+    playCall.style.backgroundColor = "var(--secondary)";
+    playCallMsg.textContent = "Player Two's turn";
     let coordinates = computerAttack(playerOne);
     setTimeout(function () {
       playerOne.attack(coordinates);
@@ -48,7 +55,8 @@ const play = () => {
         turn = 0;
         play();
       } else {
-        console.log("Game Over");
+        playCall.style.background = "var(--clr-winner)";
+        playCallMsg.textContent = "Winner: PLAYER TWO!!!";
         renderField(containers[0], playerOne);
         renderField(containers[1], playerTwo);
       }

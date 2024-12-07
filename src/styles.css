@@ -7,6 +7,8 @@
 
     --clr-missed: hsl(220, 27%, 85%);
     --clr-hit: hsl(0, 100%, 58%);
+    --clr-greenlight: hsl(100, 77%, 48%);
+    --clr-winner: linear-gradient(#AE8625, #F7EF8A, #D2AC47, #EDC967);
 }
 
 * {
