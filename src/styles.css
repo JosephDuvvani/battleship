@@ -5,6 +5,7 @@
     --secondary: hsl(34, 25%, 74%);
     --accent: hsl(88, 26%, 63%);
 
+    --bg-semi-transparent: hsl(220, 27%, 98%, 0.9);
     --clr-missed: hsl(220, 27%, 85%);
     --clr-hit: hsl(0, 100%, 58%);
     --clr-greenlight: hsl(100, 77%, 48%);
@@ -29,6 +30,10 @@ body {
     color: var(--text);
 }
 
+.hide {
+    visibility: hidden;
+}
+
 .main-container {
     display: grid;
     grid-auto-rows: min-content;
@@ -46,7 +51,7 @@ body {
 .play-call-container {
     display: grid;
     justify-items: center;
-    margin: 1rem 0 2rem 0;
+    margin: 1.5rem 0 3rem 0;
 }
 
 .play-call {
@@ -54,12 +59,41 @@ body {
     padding: .5rem 1rem;
     min-width: 20rem;
     border-radius: 50vh;
+    display: flex;
+    justify-content: center;
 }
 
 .players-container {
     display: grid;
     grid-auto-flow: column;
     gap: 2rem;
+    position: relative;
+}
+
+.play-options-container {
+    position: absolute;
+    display: grid;
+    grid-template-rows: repeat(2, min-content);
+    gap: .5rem 2rem;
+    left: 50%;
+    top: -1rem;
+    transform: translateX(-50%);
+}
+
+.play-options-choose {
+    grid-column: 1/3;
+    justify-self: center;
+}
+.play-options-choose span {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.play-options-button {
+    cursor: pointer;
+    padding: .3em 1em;
+    border-radius: .2em;
+    background-color: var(--accent);
 }
 
 .player {
@@ -73,11 +107,55 @@ body {
     justify-self: start;
 }
 
+.ready-player-button-container {
+    display: grid;
+    margin-bottom: .5rem;
+}
+
+.ready-player-button {
+    font-size: .9rem;
+    padding: .1em 1em;
+    border-radius: .2em;
+    background-color: var(--accent);
+    cursor: pointer;
+}
+
+.ready-player-one {
+    justify-self: start;
+}
+
+.ready-player-two {
+    justify-self: end;
+}
+
 .player-title {
     display: grid;
     justify-items: center;
     order: 1;
     margin: 1rem;
+}
+
+.grid-container {
+    position: relative;
+}
+
+.grid-overlay {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+}
+
+.grid-overlay:hover div {
+background-color: var(--bg-semi-transparent);
+}
+
+.grid-overlay div {
+    position: absolute;
+    inset: 1rem;
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    background-color: var(--background);
 }
 
 .battlefield-table {

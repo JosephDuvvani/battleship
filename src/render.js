@@ -3,6 +3,8 @@ export const renderField = (container, player, drag = false) => {
   const table = document.createElement("table");
   table.classList.add("battlefield-table");
 
+  if (drag == true) table.classList.add("battlefield-table_drag");
+
   const tbody = document.createElement("tbody");
   table.appendChild(tbody);
 
@@ -39,7 +41,7 @@ export const renderField = (container, player, drag = false) => {
   container.appendChild(table);
 };
 
-export const renderEnemy = (container, player, drag = false) => {
+export const renderEnemy = (container, player) => {
   const board = player.getBoard();
   const table = document.createElement("table");
   table.classList.add("battlefield-table");
@@ -62,8 +64,6 @@ export const renderEnemy = (container, player, drag = false) => {
         data.classList.add("battlefield-cell_hit");
       } else data.classList.add("battlefield-cell_cover");
 
-      if (drag === true && board[j][i] >= 0)
-        data.classList.add("battlefield-cell_drag");
       data.dataset.y = j;
       data.dataset.x = i;
 
