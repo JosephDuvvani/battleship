@@ -186,9 +186,20 @@ background-color: var(--bg-semi-transparent);
 }
 .battlefield-cell_hit {
     background-color: var(--clr-hit);
+    border-radius: 50vh;
+    display: grid;
+    justify-items: center;
+    align-content: center;
 }
 .battlefield-cell_cover {
     background-color: var(--background);
+}
+
+.battlefield-ship_sunk {
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50vh;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 .play-button-container {

@@ -19,9 +19,14 @@ export const renderField = (container, player, drag = false) => {
       const data = document.createElement("div");
       data.classList.add("battlefield-cell-content");
       if (board[j][i] === "$") data.classList.add("battlefield-cell_empty");
-      else if (player.isDamagedAt([j, i]))
+      else if (player.isDamagedAt([j, i])) {
         data.classList.add("battlefield-cell_hit");
-      else if (board[j][i] === -1)
+        if (player.isSunk(board[j][i])) {
+          const sunk = document.createElement("div");
+          sunk.classList.add("battlefield-ship_sunk");
+          data.appendChild(sunk);
+        }
+      } else if (board[j][i] === -1)
         data.classList.add("battlefield-cell_missed");
       else if (board[j][i] >= 0) data.classList.add("battlefield-cell_ship");
 
@@ -62,6 +67,11 @@ export const renderEnemy = (container, player) => {
       if (board[j][i] === -1) data.classList.add("battlefield-cell_missed");
       else if (player.isDamagedAt([j, i])) {
         data.classList.add("battlefield-cell_hit");
+        if (player.isSunk(board[j][i])) {
+          const sunk = document.createElement("div");
+          sunk.classList.add("battlefield-ship_sunk");
+          data.appendChild(sunk);
+        }
       } else data.classList.add("battlefield-cell_cover");
 
       data.dataset.y = j;

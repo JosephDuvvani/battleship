@@ -39,14 +39,15 @@ export const Player = () => {
   const dropShip = (position, index) => gameBoard.moveShip(position, index);
   const attack = (coordinates) => gameBoard.receiveAttack(coordinates);
   const isDefeated = () => gameBoard.isAllSunk();
-
   const isDamagedAt = (coordinates) => gameBoard.isDamagedAt(coordinates);
+  const isSunk = (index) => gameBoard.isSunk(index);
 
   return {
     getBoard,
     getShips,
     attack,
     isDefeated,
+    isSunk,
     randomise,
     dropShip,
     removeShip,

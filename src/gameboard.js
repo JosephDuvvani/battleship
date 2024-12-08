@@ -33,6 +33,8 @@ export const Gameboard = () => {
     }
   };
 
+  const isSunk = (index) => _myShips[index].isSunk();
+
   const isAllSunk = () => {
     for (let ship of _myShips) {
       if (!ship.isSunk()) return false;
@@ -55,6 +57,7 @@ export const Gameboard = () => {
     moveShip,
     removeShip,
     receiveAttack,
+    isSunk,
     isAllSunk,
     getBoard,
     isDamagedAt,
